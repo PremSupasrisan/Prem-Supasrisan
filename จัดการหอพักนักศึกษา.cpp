@@ -12,24 +12,21 @@ void Payment();
 //void ChangeRoomDetail();
 ////////////////////////////// ประกาศตัวแปรห้องพัก
 const int countRooms = 10;
-string rooms[countRooms][7] ;
-////////////////////////////// ประกาศตัวแปรผู้เข้าพัก
-const int countGuests = 10;
-string guests[countGuests][4];
+string rooms[countRooms][7];
 int main()
 {
 	int menu , Rooms = 1;
 	SetupRooms();
 	do{
 		
-		cout << "MENU:" << endl;
-        cout << "1. ห้องพัก" << endl; // ข้อมูลห้องพัก
-		cout << "2. การเข้าพัก" << endl; // กรอกข้อมูลผู้เข้าพัก และห้องที่ต้องการเข้าพัก
-        cout << "3. การคืนห้องพัก" << endl; 
-        cout << "4. รายงานห้องพัก" << endl;
-		cout << "5. ชำระค่าห้องพัก" <<endl;
-        cout << "0. ออกจากโปรแกรม" << endl;
-        cout << "โปรดเลือก: ";
+		cout << "Menu:" << endl;
+        cout << "1. Room" << endl; // ข้อมูลห้องพัก
+		cout << "2. Checkin" << endl; // กรอกข้อมูลผู้เข้าพัก และห้องที่ต้องการเข้าพัก
+        cout << "3. Checkout" << endl; 
+        cout << "4. Report" << endl;
+		cout << "5. Payment" <<endl;
+        cout << "0. Exit program" << endl;
+        cout << "Select menu: ";
         cin >> menu;
 		if (menu == 1)
 		{AddRooms();}
@@ -41,21 +38,24 @@ int main()
 		{CheckOut();}
 
 		else if (menu == 4)
-		{Report();}
+		{	cout <<endl;
+			Report();}
 		
 		else if (menu == 5)
 		{Payment();}
 
-		else
-		{cout << "กรุณากรอกเมนูอีกครั้ง\n";}
-		cout << endl;
-		
-	}while(menu != 0);
+		else if (menu == 0)
+		{break;}
 
+		else
+		{cout << "Please try again\n";}
+		cout << endl;
+	
+	}while(menu != 0);
+	
 	system("pause");
 	return 0;
 }
-
 
 void SetupRooms()
 {
@@ -82,6 +82,7 @@ void SetupRooms()
 void AddRooms()
 {
 	int roomNumber;
+	cout << "--------------------------------" << endl;
     cout << "Select Room : ";
     cin >> roomNumber;
     int realRoomNumber = roomNumber - 1;
@@ -98,26 +99,17 @@ void AddRooms()
 		cout <<"Tel		: " << rooms[realRoomNumber][5] <<"\t\n"; 
 		cout <<"Payment		: "<<stoi(rooms[realRoomNumber][2]) <<"\t";
 		cout << endl;
-		cout << endl;
 	 }
-}
-
-void AddGuests()
-{
-	for ( int i= 1 ; i <= countGuests ; i++) 
-	{
-		guests[i][0] = "";  // ชื่อ-นามสกุล
-		guests[i][1] = "";  // idCard
-		guests[i][2] = "";	// เบอร์โทร
-		guests[i][3] = "";	// หมายเลขห้องที่พัก
-	}
+	 cout << "--------------------------------" << endl;
 }
 
 void CheckIn()
 {
 	int roomNumber = 0;
 	string name,surname,idcard,tel;
-	cout << "CheckIn\n";
+	cout << "--------------------------------" << endl;
+	cout << "Checkin\n";
+	cout << "--------------------------------" << endl;
 	cout << "Choose Room Number\n";
 	cout << "Air(1-5) | Fan(6-10) : "; 
 	cin >> roomNumber;
@@ -134,13 +126,15 @@ void CheckIn()
 	rooms[realRoomNumber][3] = name + " " + surname; // ชื่อ-นามสกุล
 	rooms[realRoomNumber][4] = idcard; // idCard
 	rooms[realRoomNumber][5] = tel; // เบอร์โทร
+	cout << "--------------------------------" << endl;
 }
-
 
 void CheckOut()
 {
     int roomNumber;
-    cout << "Checkout" << endl;
+	cout << "--------------------------------" << endl;
+	cout << "Checkout\n";
+    cout << "--------------------------------" << endl;
     cout << "Room Number Checkout : ";
     cin >> roomNumber;
     int realRoomNumber = roomNumber - 1;
@@ -161,10 +155,10 @@ void CheckOut()
 
         if (stoi(rooms[realRoomNumber][2]) == roomPrice)
         {
-            cout << "Checkout Room " << roomNumber << " And Pay " << rooms[realRoomNumber][2] << " Baht " << endl;
-            cout << "ชำระเงินเสร็จสมบูรณ์" << endl;
+            cout << "Payment completed successfully." << endl;
+			cout << "Checkout Room " << roomNumber <<"." << endl;
             
-            // รีเซ็ตข้อมูลห้องพักที่คืน
+         // รีเซ็ตข้อมูลห้องพักที่คืน
             rooms[realRoomNumber][1] = "empty";
             rooms[realRoomNumber][2] = "0";
             rooms[realRoomNumber][3] = "-";
@@ -173,25 +167,25 @@ void CheckOut()
         }
         else
         {
-            cout << "ท่านไม่สามารถ Checkout ได้เนื่องจากค้างชำระค่าห้อง" << endl;
+            cout << "You cannot check out because there is an outstanding room charge." << endl;
         }
     }
+	cout << "--------------------------------" << endl;
 }
-
-
 
 void Report()
 {
+	
     cout << "Report" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------" << endl;
     cout << setw(10) << left << "Room";
     cout << setw(10) << left << "Type";
-    cout << setw(10) << left << "Status";
+    cout << setw(12) << left << "Status";
     cout << setw(10) << left << "PRICE";
     cout << setw(20) << left << "Name-Surname";
     cout << setw(18) << left << "IDCard";
     cout << setw(10) << left << "Tel" << endl;
-    cout << "----------------------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------" << endl;
 
     for (int i = 0; i < countRooms; i++)
     {
@@ -199,23 +193,27 @@ void Report()
 
         cout << setw(10) << left << i + 1;
         cout << setw(10) << left << rooms[i][0];
-        cout << setw(10) << left << rooms[i][1];
+        cout << setw(12) << left << rooms[i][1];
         cout << setw(10) << left << roomPrice;
         cout << setw(20) << left << rooms[i][3];
         cout << setw(18) << left << rooms[i][4];
         cout << setw(10) << left << rooms[i][5] << endl;
     }
 
-    cout << "----------------------------------------------------------------------------------------" << endl;
+    cout << "------------------------------------------------------------------------------------------" << endl;
 }
 
 void Payment()
 {	
 	int payroom = 0;
+	cout << "--------------------------------" << endl;
+	cout << "Payment\n";
+	cout << "--------------------------------" << endl;
 	cout << "Room number to pay : ";
 	cin >> payroom;
 	cout << "Payment : ";
 	cin >> rooms[payroom-1][2];
+	cout << "--------------------------------" << endl;
 }
 
 /*void ChangeRoomDetail()
