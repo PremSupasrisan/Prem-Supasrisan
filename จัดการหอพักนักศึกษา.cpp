@@ -18,8 +18,7 @@ int main()
 	int menu , Rooms = 1;
 	SetupRooms();
 	do{
-		
-		cout << "Menu:" << endl;
+		cout << "Program Dormitory : \n";
         cout << "1. Room" << endl; // ข้อมูลห้องพัก
 		cout << "2. Checkin" << endl; // กรอกข้อมูลผู้เข้าพัก และห้องที่ต้องการเข้าพัก
         cout << "3. Checkout" << endl; 
