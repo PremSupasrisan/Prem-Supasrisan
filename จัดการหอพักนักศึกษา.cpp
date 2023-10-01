@@ -4,8 +4,7 @@
 using namespace std;
 
 // ประกาศฟังก์ชันทั้งหมดที่จะใช้ในโปรแกรม
-void AddRooms();
-void AddGuests();
+void CheckRooms();
 void CheckIn();
 void CheckOut();
 void Report();
@@ -21,31 +20,31 @@ int main() {
 
     do {
         cout << "Program Dormitory : \n";
-        cout << "1. Room" << endl; // แสดงเมนูเลือกห้องพัก
-        cout << "2. Checkin" << endl; // แสดงเมนูที่ใช้ในการลงทะเบียนผู้เข้าพัก
-        cout << "3. Checkout" << endl; // แสดงเมนูที่ใช้ในการเช็คเอาท์
+        cout << "1. Checkin" << endl; // แสดงเมนูเลือกห้องพัก
+        cout << "2. Checkroom" << endl; // แสดงเมนูที่ใช้ในการลงทะเบียนผู้เข้าพัก
+        cout << "3. Payment" << endl; // แสดงเมนูที่ใช้ในการเช็คเอาท์
         cout << "4. Report" << endl; // แสดงรายงานห้องพัก
-        cout << "5. Payment" << endl; // แสดงเมนูที่ใช้ในการชำระเงิน
+        cout << "5. Checkout" << endl; // แสดงเมนูที่ใช้ในการชำระเงิน
         cout << "0. Exit program" << endl; // แสดงเมนูสำหรับออกจากโปรแกรม
         cout << "Select menu: ";
         cin >> menu;
 
         // ตรวจสอบเมนูที่ผู้ใช้เลือกและเรียกใช้ฟังก์ชันที่เกี่ยวข้อง
         if (menu == 1) 
-		{AddRooms();} 
+		{CheckIn();} 
 
 		else if (menu == 2)
-		{CheckIn();}
+		{CheckRooms();}
 
 		else if (menu == 3)
-		{CheckOut();}
+		{Payment();}
 
 		else if (menu == 4) 
 		{cout << endl;
 		 Report();	}
 
 		else if (menu == 5) 
-		{Payment();}
+		{CheckOut();}
 
 		else if (menu == 0) 
 		{break;} 
@@ -70,7 +69,7 @@ void SetupRooms() {
             rooms[i][0] = "fan"; // ห้องพัดลม
         }
 
-        rooms[i][1] = "empty"; // สถานะห้อง ว่าง
+        rooms[i][1] = "Empty"; // สถานะห้อง ว่าง
         rooms[i][2] = "0"; // ราคาห้อง
         rooms[i][3] = "-"; // ชื่อ-นามสกุล
         rooms[i][4] = "-"; // idCard
@@ -79,7 +78,7 @@ void SetupRooms() {
 }
 
 // ฟังก์ชันเพิ่มข้อมูลห้องพัก
-void AddRooms() {
+void CheckRooms() {
     int roomNumber;
     cout << "--------------------------------" << endl;
     cout << "Select Room : ";
@@ -121,7 +120,7 @@ void CheckIn() {
     cin >> idcard;
     cout << "Tel     : ";
     cin >> tel;
-    rooms[realRoomNumber][1] = "notempty"; // ห้องไม่ว่าง
+    rooms[realRoomNumber][1] = "notEmpty"; // ห้องไม่ว่าง
     rooms[realRoomNumber][3] = name + " " + surname; // ชื่อ-นามสกุล
     rooms[realRoomNumber][4] = idcard; // idCard
     rooms[realRoomNumber][5] = tel; // เบอร์โทร
